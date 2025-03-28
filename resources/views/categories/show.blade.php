@@ -11,6 +11,7 @@
                 <x-button class="search-btn">Search</x-button>
             </div>
             <div class="header-user">
+                
                 @auth
                 <a href="{{ route('profile') }}" class="user-link">Hello, {{ $info['user_name'] ?? '' }}</a>
                 @endauth
@@ -27,66 +28,48 @@
         </header>
 
     </x-slot:navbar>
-
     <x-slot:body>
 
-        <main class="product-display-main">
-            <section class="product-display-section">
-                <div class="product-image">
-                    <img src="product1.jpg" alt="Product 1">
+        <main class="products-main">
+            <aside class="products-sidebar">
+                <h3>Filter Products</h3>
+                <div class="filter-group">
+                    <h4>Category</h4>
+                    <x-input type="checkbox" name="category" value="clothing">Clothing</x-input>
+                    <x-input type="checkbox" name="category" value="accessories">Accessories</x-input>
+                    <x-input type="checkbox" name="category" value="electronics">Electronics</x-input>
                 </div>
-                <div class="product-details">
-                    <h1>{{ $product->prod_name }}</h1>
-                    <div class="product-rating">
-                        <span>★★★★☆</span> (120 reviews)
+                <div class="filter-group">
+                    <h4>Price Range</h4>
+                    <x-input type="radio" name="price" value="0-25">$0 - $25</x-input>
+                    <x-input type="radio" name="price" value="25-50">$25 - $50</x-input>
+                    <x-input type="radio" name="price" value="50+">$50+</x-input>
+                </div>
+            </aside>
+
+            <section class="products-content">
+                <h1>Explore Our Products</h1>
+                <div class="products-grid">
+                    @foreach ($products as $product)
+                    <div class="product-card">
+                        <img src="product1.jpg" alt="{{ $product->prod_name }}">
+                        <h2>{{ $product->prod_name }}</h2>
+                        <p class="description">{{ $product->prod_desc }}</p>
+                        <p class="price">${{ $product->price }}</p>
+                        <div class="rating">
+                            <span>★★★★☆</span> (120 reviews)
+                        </div>
+                        <a href="{{ route('product', $product->id) }}" class="index-add-to-cart-btn">More Details</a>
+                        <div class="hover-dots">
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
                     </div>
-                    <p class="product-price">${{ $product->price }}</p>
-                    {{-- <div class="product-tags">
-                        <span>Clothing</span>
-                        <span>Men</span>
-                        <span>Casual</span>
-                    </div> --}}
-                    <p class="product-description">
-                        {{ $product->prod_desc }}
-                    </p>
-                    <button class="add-to-cart-btn">Add to Cart</button>
+                    @endforeach
                 </div>
-            </section>
-
-            <section class="shipping-section">
-                <h2>Shipping Information</h2>
-                <div class="shipping-details">
-                    <p><strong>Estimated Delivery:</strong> March 25, 2025 - March 27, 2025</p>
-                    <p><strong>Shipping Cost:</strong> $5.99 (Free on orders over $50)</p>
-                    <p><strong>Shipping Options:</strong> Standard (3-5 days), Express (1-2 days)</p>
-                    <p><strong>Return Policy:</strong> 30-day returns with free return shipping</p>
+                <div>{{ $prods->links() }}</div>
                 </div>
-            </section>
-
-            <section class="reviews-section">
-                <h2>Customer Reviews</h2>
-
-                @foreach ($product->comment as $prod)
-                <div class="review">
-                    <div class="review-header">
-                        <span class="reviewer-name">{{ $prod->author }}</span>
-                        <span class="review-rating">★★★★★</span>
-                    </div>
-                    <p class="review-date">{{$prod->created_at}}</p>
-                    <p class="review-text">{{ $prod->comment }}</p>
-                </div>
-                @endforeach
-
-                @auth
-                <form class="review-form" action="{{ route('comment', $product->id) }}" method="POST">
-                    @csrf
-                    <textarea name="comment" placeholder="Write your comment here..." required></textarea>
-                    <button type="submit" class="submit-review-btn">Submit Comment</button>
-                </form>
-                @else
-                <x-button style="a" class="login-to-comment-btn" href="{{ route('register') }}">Login To Leave A Comment</x-button>
-                @endauth
-
             </section>
         </main>
 
