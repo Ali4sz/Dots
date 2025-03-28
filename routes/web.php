@@ -41,8 +41,12 @@ Route::get('/products/{product}', [ProductController::class, 'show'])->name('pro
 Route::post('/products/{product}', [CommentController::class, 'store'])->name('comment');
 
 Route::get('/categories', function () {
-    return view('categories');
+    return view('categories.index');
 })->name('categories');
+
+Route::get('/categories/slug', function() {
+    return view('categories.show');
+});
 
 // Route::get('/prod', function () {
 //     return view('products.show');
