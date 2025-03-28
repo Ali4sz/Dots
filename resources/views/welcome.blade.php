@@ -5,7 +5,7 @@
             <x-slot:navlink>
                 <ul>
                     <x-nav-link href="{{ route('shop') }}">Shop</x-nav-link>
-                    <x-nav-link href="#">Categories</x-nav-link>
+                    <x-nav-link href="{{ route('categories') }}">Categories</x-nav-link>
                     <x-nav-link href="#">Sales</x-nav-link>
                 </ul>
 

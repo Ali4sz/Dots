@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -42,6 +43,16 @@ class ProductController extends Controller
         $product->load('comment'); // This will load the 'comments' relationship
 
         return view('products.show', compact('product'));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function showTag($slug)
+    {
+        $tag = Tag::where('slug', $slug)->firstOrFail();
+        $products = $tag->product->paginate(12);
+        return view('tags.show', compact('tag', 'products'));
     }
 
     /**
