@@ -44,7 +44,7 @@ Route::get('/categories', function () {
     return view('categories.index');
 })->name('categories');
 
-Route::get('/categories/slug', function() {
+Route::get('/categories/{slug}', function() {
     return view('categories.show');
 });
 
