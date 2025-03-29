@@ -68,7 +68,7 @@
                     </div>
                     @endforeach
                 </div>
-                <div>{{ $prods->links() }}</div>
+                {{-- <div>{{ $prods->links() }}</div> --}}
                 </div>
             </section>
         </main>

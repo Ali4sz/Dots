@@ -31,18 +31,12 @@
         <main class="categories-main">
             <h1>Shop by Category</h1>
             <div class="categories-grid">
-                <a href="#clothing" class="category-card">
-                    <img src="http://localhost/dashboard/Dots/resources/img/clothing.jpg" alt="Clothing">
-                    <span class="category-name">Clothing</span>
+                @foreach ($tags as $tag)
+                <a href="{{ route('slug', $tag->slug) }}" class="category-card">
+                    <img src="{{ $tag->img_url }}" alt="Clothing">
+                    <span class="category-name">{{ $tag->slug }}</span>
                 </a>
-                <a href="#electronics" class="category-card">
-                    <img src="http://localhost/dashboard/Dots/resources/img/electronics.jpg" alt="Electronics">
-                    <span class="category-name">Electronics</span>
-                </a>
-                <a href="#accessories" class="category-card">
-                    <img src="http://localhost/dashboard/Dots/resources/img/accessories.jpg" alt="Accessories">
-                    <span class="category-name">Accessories</span>
-                </a>
+                @endforeach
             </div>
         </main>
     </x-slot:body>
