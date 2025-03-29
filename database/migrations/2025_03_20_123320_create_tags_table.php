@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             // $table->foreignIdFor(products::class)->constrained();
             $table->string('tag_name');
+            $table->string('slug');
+            $table->string('img_url');
             $table->timestamps();
         });
     }

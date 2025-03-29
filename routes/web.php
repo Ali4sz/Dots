@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,13 +41,9 @@ Route::get('/products/{product}', [ProductController::class, 'show'])->name('pro
 // Submit The User Comment
 Route::post('/products/{product}', [CommentController::class, 'store'])->name('comment');
 
-Route::get('/categories', function () {
-    return view('categories.index');
-})->name('categories');
+Route::get('/categories', [TagController::class, 'index'])->name('categories');
 
-Route::get('/categories/{slug}', function() {
-    return view('categories.show');
-});
+Route::get('/categories/{slug}', [TagController::class, 'show'])->name('slug');
 
 // Route::get('/prod', function () {
 //     return view('products.show');

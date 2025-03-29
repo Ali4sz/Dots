@@ -12,7 +12,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        $tags = Tag::all();
+        return view('categories.index', compact('tags'));
     }
 
     /**
@@ -37,7 +38,7 @@ class TagController extends Controller
     public function show($slug)
     {
         $tag = Tag::where('slug', $slug)->firstOrFail();
-        $products = $tag->product->paginate(12);
+        $products = $tag->product;
         return view('categories.show', compact('tag', 'products'));
     }
 

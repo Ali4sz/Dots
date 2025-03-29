@@ -46,16 +46,6 @@ class ProductController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function showTag($slug)
-    {
-        $tag = Tag::where('slug', $slug)->firstOrFail();
-        $products = $tag->product->paginate(12);
-        return view('tags.show', compact('tag', 'products'));
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Product $product)
