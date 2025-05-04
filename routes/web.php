@@ -40,6 +40,9 @@ Route::get('/products/{product}', [ProductController::class, 'show'])->name('pro
 
 // Submit The User Comment
 Route::post('/products/{product}', [CommentController::class, 'store'])->name('comment');
+Route::get('/cart', function () {
+    return view('cart');
+})->name('cart');
 
 Route::get('/categories', [TagController::class, 'index'])->name('categories');
 
