@@ -48,7 +48,13 @@ class User extends Authenticatable
         ];
     }
 
-    public function detail() {
+    public function detail()
+    {
         return $this->hasOne(UserDetail::class);
+    }
+
+    public function cart()
+    {
+        return $this->hasOne(Cart::class);
     }
 }
