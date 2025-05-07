@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TagController;
@@ -38,8 +39,13 @@ Route::post('/edit', [UserController::class, 'update'])->name('update');
 Route::get('/products', [ProductController::class, 'index'])->name('shop');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('product');
 
+Route::name('prod')->group(function () {
+    Route::post('/products/{product}', [CartController::class, 'addToCart']);
+    Route::post('/products/{product}', [CommentController::class, 'store']);
+});
+
+
 // Submit The User Comment
-Route::post('/products/{product}', [CommentController::class, 'store'])->name('comment');
 Route::get('/cart', function () {
     return view('cart');
 })->name('cart');
