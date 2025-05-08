@@ -19,7 +19,7 @@ class CartController extends Controller
                 'price' => $product->price,
             ],
         ]);
-        return redirect()->route('')->with('success', 'Item added to cart!');
+        return redirect()->route('cart')->with('success', 'Item added to cart!');
     }
 
     private function getCart()
@@ -27,5 +27,15 @@ class CartController extends Controller
         if (auth()->check()) {
             return Cart::firstOrCreate(['user_id' => auth()->id()]);
         }
+    }
+
+    public function Showcart()
+    {
+        $cart = $this->Getcart();
+        $Cartitems = $cart->product()->Withpivot('Quantity', 'Price')->Get();
+        $Total = $Cartitems->Sum(function ($Item) {
+            return $Item->Pivot->Price * $Item->Pivot->Quantity;
+        });
+        return View('Cart', Compact('Cartitems', 'Total'));
     }
 }

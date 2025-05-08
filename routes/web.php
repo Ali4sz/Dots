@@ -44,8 +44,6 @@ Route::name('prod')->group(function () {
     Route::post('/products/{product}', [CommentController::class, 'store']);
 });
 
-
-// Submit The User Comment
 Route::get('/cart', function () {
     return view('cart');
 })->name('cart');

@@ -50,6 +50,7 @@
                         {{ $product->prod_desc }}
                     </p>
                     <form action="{{ route('prod', $product->id) }}" method="POST">
+                        @csrf
                         <input type="submit" value="Add to Cart" name="" class="add-to-cart-btn">
                         {{-- <in class="add-to-cart-btn">Add to Cart</in> --}}
                     </form>
