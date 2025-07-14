@@ -49,7 +49,12 @@
                     <p class="product-description">
                         {{ $product->prod_desc }}
                     </p>
-                    <button class="add-to-cart-btn">Add to Cart</button>
+                    <form action="{{ route('prod', $product->id) }}" method="POST">
+                        @csrf
+                        <input type="submit" value="Add to Cart" name="" class="add-to-cart-btn">
+                        {{-- <in class="add-to-cart-btn">Add to Cart</in> --}}
+                    </form>
+
                 </div>
             </section>
 
@@ -78,13 +83,14 @@
                 @endforeach
 
                 @auth
-                <form class="review-form" action="{{ route('comment', $product->id) }}" method="POST">
+                <form class="review-form" action="{{ route('prod', $product->id) }}" method="POST">
                     @csrf
                     <textarea name="comment" placeholder="Write your comment here..." required></textarea>
                     <button type="submit" class="submit-review-btn">Submit Comment</button>
                 </form>
                 @else
-                <x-button style="a" class="login-to-comment-btn" href="{{ route('register') }}">Login To Leave A Comment</x-button>
+                <x-button style="a" class="login-to-comment-btn" href="{{ route('register') }}">Login To Leave A Comment
+                </x-button>
                 @endauth
 
             </section>

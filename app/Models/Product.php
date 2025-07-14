@@ -19,4 +19,14 @@ class Product extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
+
+    // public function cart()
+    // {
+    //     return $this->hasOne(Cart::class);
+    // }
+
+    public function cartitems()
+    {
+        return $this->hasMany(CartItem::class);
+    }
 }
